@@ -6,6 +6,7 @@ import Sidebar from "./sidebar";
 import Payment from "@/app/sides/payment";
 import Account from "@/app/sides/account";
 import ChatList from "@/app/chats/page"; // Исправленный импорт
+import HomePage from "./home";
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState("home");
@@ -18,6 +19,8 @@ export default function Home() {
         return <Payment />;
       case "chats":
         return <ChatList />;
+      case "home":
+        return <HomePage />;
       case "help":
         return (
           <div>
