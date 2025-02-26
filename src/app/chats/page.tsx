@@ -31,12 +31,16 @@ export default function ChatList() {
   if (error) return <p className="text-center text-red-500">{error}</p>;
 
   return (
-    <div className="p-4 max-w-lg mx-auto">
+    <div className="p-4 w-full">
       <h2 className="text-4xl font-bold text-black mb-6">📩 Чаты</h2>
-      <div className="space-y-2">
+      <div className="space-y-2 w-full">
         {chats.map((chat) => (
-          <Link key={chat.id} href={`/chats/${chat.id}`} className="block">
-            <div className="p-4 bg-white border rounded-xl hover:shadow-lg transition flex items-center gap-4 cursor-pointer">
+          <Link
+            key={chat.id}
+            href={`/chats/${chat.id}`}
+            className="block w-full"
+          >
+            <div className="p-4 bg-white border rounded-xl hover:shadow-lg transition flex items-center gap-4 cursor-pointer w-full">
               <Image
                 src={chat.avatar}
                 width={40}

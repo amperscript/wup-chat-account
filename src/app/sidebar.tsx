@@ -50,6 +50,7 @@ const Sidebar = ({ activeTab, setActiveTab }) => {
   ];
 
   const [isOpen, setIsOpen] = useState(false);
+  const [isClosing, setIsClosing] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [showCreateForm, setShowCreateForm] = useState(false);
   const [newProjectName, setNewProjectName] = useState("");
@@ -66,7 +67,7 @@ const Sidebar = ({ activeTab, setActiveTab }) => {
   useEffect(() => {
     function handleClickOutside(event) {
       if (modalRef.current && !modalRef.current.contains(event.target)) {
-        setIsOpen(false);
+        closeModal();
       }
     }
 
@@ -77,6 +78,14 @@ const Sidebar = ({ activeTab, setActiveTab }) => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [isOpen]);
+
+  const closeModal = () => {
+    setIsClosing(true);
+    setTimeout(() => {
+      setIsOpen(false);
+      setIsClosing(false);
+    }, 300); // Match transition duration
+  };
 
   const handleCreateProject = () => {
     if (newProjectName.trim() === "") return;
@@ -116,10 +125,12 @@ const Sidebar = ({ activeTab, setActiveTab }) => {
           />
         </button>
 
-        {isOpen && (
+        {(isOpen || isClosing) && (
           <div
             ref={modalRef}
-            className="absolute top-24 w-64 bg-white border border-gray-200 rounded-lg shadow-lg z-10"
+            className={`absolute left-64 top-24 w-72 bg-white border border-gray-200 rounded-lg shadow-lg z-10 transition-opacity duration-300 ease-in-out ${
+              isClosing ? "opacity-0" : "opacity-100"
+            }`}
           >
             <div className="p-3 border-b border-gray-200">
               <input
@@ -138,7 +149,7 @@ const Sidebar = ({ activeTab, setActiveTab }) => {
                   className="px-4 py-3 hover:bg-gray-100 cursor-pointer flex items-center justify-between"
                   onClick={() => {
                     setSelectedProject(project.name);
-                    setIsOpen(false);
+                    closeModal();
                   }}
                 >
                   <div>

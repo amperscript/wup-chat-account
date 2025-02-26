@@ -7,7 +7,7 @@ const chats = [
   {
     id: "1",
     name: "Анна Иванова",
-    avatar: "/avatars/anna.jpg",
+    avatar: "/public/avatar3.jpg",
     messages: [
       { id: 1, text: "Привет! Как дела?", sender: "other" },
       { id: 2, text: "Привет! Всё отлично, а у тебя?", sender: "me" },
@@ -48,21 +48,16 @@ export async function POST(req, { params }) {
     sender: "me",
     file: null,
   };
-
-  // Обработка файла, если он есть
   if (file) {
     try {
       const bytes = await file.arrayBuffer();
       const buffer = Buffer.from(bytes);
 
-      // Создаем уникальное имя файла
       const fileName = `${uuidv4()}-${file.name}`;
       const filePath = join(process.cwd(), "public", "uploads", fileName);
 
-      // Сохраняем файл
       await writeFile(filePath, buffer);
 
-      // Добавляем информацию о файле к сообщению
       newMessage.file = {
         name: file.name,
         size: file.size,
@@ -78,10 +73,8 @@ export async function POST(req, { params }) {
     }
   }
 
-  // Добавляем сообщение в чат
   chat.messages.push(newMessage);
 
-  // Имитация ответа от собеседника через некоторое время
   setTimeout(() => {
     const responseMessage = {
       id: Date.now(),
