@@ -4,7 +4,9 @@ import {
   TbChartBar,
   TbMessages,
   TbMessageCheck,
+  TbShoppingCart,
 } from "react-icons/tb";
+import Link from "next/link";
 
 export default function Home() {
   const [timeRange, setTimeRange] = useState("day");
@@ -43,8 +45,6 @@ export default function Home() {
   return (
     <div>
       <h2 className="text-4xl font-bold text-black mb-6">Главная</h2>
-
-      {/* Token Balance Card */}
       <div className="border rounded-lg p-6 mb-8 hover:shadow-lg transition-shadow bg-wup-green-easy">
         <div className="flex items-center gap-4 mb-2">
           <div className="p-3 rounded-full bg-wup-green text-white">
@@ -58,21 +58,13 @@ export default function Home() {
               {tokenBalance.toLocaleString()}
             </p>
           </div>
+          <Link href="/sides/payment" className="ml-auto">
+            <button className="bg-wup-green hover:bg-wup-green-hover text-white py-2 px-4 rounded-lg flex items-center gap-2 transition-colors">
+              <TbShoppingCart className="h-5 w-5" />
+              <span>Купить токены</span>
+            </button>
+          </Link>
         </div>
-        <div className="w-full bg-gray-200 rounded-full h-2 mt-4">
-          <div
-            className="bg-wup-green-hover h-2 rounded-full"
-            style={{
-              width: `${Math.min(
-                Math.round((tokenBalance / 1000000) * 100),
-                100
-              )}%`,
-            }}
-          ></div>
-        </div>
-        <p className="text-xs text-wup-text mt-2">
-          {tokenBalance.toLocaleString()} / 1,000,000 токенов
-        </p>
       </div>
 
       <div className="mb-6">
