@@ -16,10 +16,10 @@ const chats = [
   {
     id: "2",
     name: "Сергей Петров",
-    avatar: "/avatars/sergey.jpg",
+    avatar: "/public/avatar3.jpg",
     messages: [
-      { id: 1, text: "Привет!", sender: "me" },
-      { id: 2, text: "Давай завтра встретимся", sender: "other" },
+      { id: 1, text: "МОШЕННИКИ! верните деньги!", sender: "other" },
+      { id: 2, text: "хааххахаха лох", sender: "me" },
     ],
   },
 ];
